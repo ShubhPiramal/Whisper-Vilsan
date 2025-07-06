@@ -1,13 +1,39 @@
 Execution failed for task ':app:buildCMakeDebug[arm64-v8a]'.
 > com.android.ide.common.process.ProcessException: ninja: Entering directory `D:\Whisper-Vilsan\whisper_native\app\.cxx\Debug\39633t4o\arm64-v8a'
-  [1/3] Building CXX object CMakeFiles/audioEngine.dir/TFLiteEngineJNI.cpp.o
-  [2/3] Building CXX object CMakeFiles/audioEngine.dir/TFLiteEngine.cpp.o
-  [3/3] Linking CXX shared library D:\Whisper-Vilsan\whisper_native\app\build\intermediates\cxx\Debug\39633t4o\obj\arm64-v8a\libaudioEngine.so
-  FAILED: D:/Whisper-Vilsan/whisper_native/app/build/intermediates/cxx/Debug/39633t4o/obj/arm64-v8a/libaudioEngine.so
-  cmd.exe /C "cd . && C:\Users\SHUBH\AppData\Local\Android\Sdk\ndk\25.1.8937393\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android26 --sysroot=C:/Users/SHUBH/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot -fPIC -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fno-limit-debug-info  -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--fatal-warnings -Wl,--gc-sections -Wl,--no-undefined -Qunused-arguments -shared -Wl,-soname,libaudioEngine.so -o D:\Whisper-Vilsan\whisper_native\app\build\intermediates\cxx\Debug\39633t4o\obj\arm64-v8a\libaudioEngine.so CMakeFiles/audioEngine.dir/TFLiteEngine.cpp.o CMakeFiles/audioEngine.dir/TFLiteEngineJNI.cpp.o  D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/generated-libs/arm64-v8a/libtensorflowlite.so  -latomic -lm && cd ."
-  ld: error: undefined symbol: TfLiteGpuDelegateOptionsV2Default
-  >>> referenced by TFLiteEngine.cpp:271 (D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/TFLiteEngine.cpp:271)
-  >>>               CMakeFiles/audioEngine.dir/TFLiteEngine.cpp.o:(TFLiteEngine::initializeGpuDelegate())
+  [1/6] Building CXX object CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/delegate_options.cc.o
+  [2/6] Building CXX object CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/api.cc.o
+  FAILED: CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/api.cc.o
+  C:\Users\SHUBH\AppData\Local\Android\Sdk\ndk\25.1.8937393\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android26 --sysroot=C:/Users/SHUBH/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DaudioEngine_EXPORTS -ID:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src -ID:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/include/flatbuffers/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/api.cc.o -MF CMakeFiles\audioEngine.dir\tf-lite-api\tensorflow_src\tensorflow\lite\delegates\gpu\api.cc.o.d -o CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/api.cc.o -c D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/api.cc
+  In file included from D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/api.cc:16:
+  D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/api.h:41:10: fatal error: 'absl/types/span.h' file not found
+  #include "absl/types/span.h"
+           ^~~~~~~~~~~~~~~~~~~
+  1 error generated.
+  [3/6] Building CXX object CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/cl/api.cc.o
+  FAILED: CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/cl/api.cc.o
+  C:\Users\SHUBH\AppData\Local\Android\Sdk\ndk\25.1.8937393\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android26 --sysroot=C:/Users/SHUBH/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DaudioEngine_EXPORTS -ID:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src -ID:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/include/flatbuffers/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/cl/api.cc.o -MF CMakeFiles\audioEngine.dir\tf-lite-api\tensorflow_src\tensorflow\lite\delegates\gpu\cl\api.cc.o.d -o CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/cl/api.cc.o -c D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/cl/api.cc
+  In file included from D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/cl/api.cc:16:
+  D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/cl/api.h:28:10: fatal error: 'absl/types/span.h' file not found
+  #include "absl/types/span.h"
+           ^~~~~~~~~~~~~~~~~~~
+  1 error generated.
+  [4/6] Building CXX object CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/gl/api.cc.o
+  FAILED: CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/gl/api.cc.o
+  C:\Users\SHUBH\AppData\Local\Android\Sdk\ndk\25.1.8937393\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android26 --sysroot=C:/Users/SHUBH/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DaudioEngine_EXPORTS -ID:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src -ID:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/include/flatbuffers/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/gl/api.cc.o -MF CMakeFiles\audioEngine.dir\tf-lite-api\tensorflow_src\tensorflow\lite\delegates\gpu\gl\api.cc.o.d -o CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/gl/api.cc.o -c D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/gl/api.cc
+  In file included from D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/gl/api.cc:16:
+  In file included from D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/gl/api.h:25:
+  D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/common/model.h:26:10: fatal error: 'absl/memory/memory.h' file not found
+  #include "absl/memory/memory.h"
+           ^~~~~~~~~~~~~~~~~~~~~~
+  1 error generated.
+  [5/6] Building CXX object CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/delegate.cc.o
+  FAILED: CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/delegate.cc.o
+  C:\Users\SHUBH\AppData\Local\Android\Sdk\ndk\25.1.8937393\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android26 --sysroot=C:/Users/SHUBH/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DaudioEngine_EXPORTS -ID:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src -ID:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/include/flatbuffers/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/delegate.cc.o -MF CMakeFiles\audioEngine.dir\tf-lite-api\tensorflow_src\tensorflow\lite\delegates\gpu\delegate.cc.o.d -o CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/delegate.cc.o -c D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/delegate.cc
+  D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/delegate.cc:25:10: fatal error: 'absl/container/flat_hash_map.h' file not found
+  #include "absl/container/flat_hash_map.h"
+           ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  1 error generated.
+  ninja: build stopped: subcommand failed.
 
 * Try:
 > Run with --info or --debug option to get more log output.
@@ -47,23 +73,39 @@ org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':app:bui
 	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
 	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:47)
 Caused by: org.gradle.internal.UncheckedException: com.android.ide.common.process.ProcessException: ninja: Entering directory `D:\Whisper-Vilsan\whisper_native\app\.cxx\Debug\39633t4o\arm64-v8a'
-[1/3] Building CXX object CMakeFiles/audioEngine.dir/TFLiteEngineJNI.cpp.o
-[2/3] Building CXX object CMakeFiles/audioEngine.dir/TFLiteEngine.cpp.o
-[3/3] Linking CXX shared library D:\Whisper-Vilsan\whisper_native\app\build\intermediates\cxx\Debug\39633t4o\obj\arm64-v8a\libaudioEngine.so
-FAILED: D:/Whisper-Vilsan/whisper_native/app/build/intermediates/cxx/Debug/39633t4o/obj/arm64-v8a/libaudioEngine.so
-cmd.exe /C "cd . && C:\Users\SHUBH\AppData\Local\Android\Sdk\ndk\25.1.8937393\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android26 --sysroot=C:/Users/SHUBH/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot -fPIC -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fno-limit-debug-info  -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--fatal-warnings -Wl,--gc-sections -Wl,--no-undefined -Qunused-arguments -shared -Wl,-soname,libaudioEngine.so -o D:\Whisper-Vilsan\whisper_native\app\build\intermediates\cxx\Debug\39633t4o\obj\arm64-v8a\libaudioEngine.so CMakeFiles/audioEngine.dir/TFLiteEngine.cpp.o CMakeFiles/audioEngine.dir/TFLiteEngineJNI.cpp.o  D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/generated-libs/arm64-v8a/libtensorflowlite.so  -latomic -lm && cd ."
-ld: error: undefined symbol: TfLiteGpuDelegateOptionsV2Default
->>> referenced by TFLiteEngine.cpp:271 (D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/TFLiteEngine.cpp:271)
->>>               CMakeFiles/audioEngine.dir/TFLiteEngine.cpp.o:(TFLiteEngine::initializeGpuDelegate())
-
-ld: error: undefined symbol: TfLiteGpuDelegateV2Create
->>> referenced by TFLiteEngine.cpp:277 (D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/TFLiteEngine.cpp:277)
->>>               CMakeFiles/audioEngine.dir/TFLiteEngine.cpp.o:(TFLiteEngine::initializeGpuDelegate())
-
-ld: error: undefined symbol: TfLiteGpuDelegateV2Delete
->>> referenced by TFLiteEngine.cpp:287 (D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/TFLiteEngine.cpp:287)
->>>               CMakeFiles/audioEngine.dir/TFLiteEngine.cpp.o:(TFLiteEngine::cleanupGpuDelegate())
-clang++: error: linker command failed with exit code 1 (use -v to see invocation)
+[1/6] Building CXX object CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/delegate_options.cc.o
+[2/6] Building CXX object CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/api.cc.o
+FAILED: CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/api.cc.o
+C:\Users\SHUBH\AppData\Local\Android\Sdk\ndk\25.1.8937393\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android26 --sysroot=C:/Users/SHUBH/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DaudioEngine_EXPORTS -ID:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src -ID:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/include/flatbuffers/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/api.cc.o -MF CMakeFiles\audioEngine.dir\tf-lite-api\tensorflow_src\tensorflow\lite\delegates\gpu\api.cc.o.d -o CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/api.cc.o -c D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/api.cc
+In file included from D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/api.cc:16:
+D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/api.h:41:10: fatal error: 'absl/types/span.h' file not found
+#include "absl/types/span.h"
+         ^~~~~~~~~~~~~~~~~~~
+1 error generated.
+[3/6] Building CXX object CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/cl/api.cc.o
+FAILED: CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/cl/api.cc.o
+C:\Users\SHUBH\AppData\Local\Android\Sdk\ndk\25.1.8937393\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android26 --sysroot=C:/Users/SHUBH/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DaudioEngine_EXPORTS -ID:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src -ID:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/include/flatbuffers/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/cl/api.cc.o -MF CMakeFiles\audioEngine.dir\tf-lite-api\tensorflow_src\tensorflow\lite\delegates\gpu\cl\api.cc.o.d -o CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/cl/api.cc.o -c D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/cl/api.cc
+In file included from D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/cl/api.cc:16:
+D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/cl/api.h:28:10: fatal error: 'absl/types/span.h' file not found
+#include "absl/types/span.h"
+         ^~~~~~~~~~~~~~~~~~~
+1 error generated.
+[4/6] Building CXX object CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/gl/api.cc.o
+FAILED: CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/gl/api.cc.o
+C:\Users\SHUBH\AppData\Local\Android\Sdk\ndk\25.1.8937393\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android26 --sysroot=C:/Users/SHUBH/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DaudioEngine_EXPORTS -ID:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src -ID:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/include/flatbuffers/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/gl/api.cc.o -MF CMakeFiles\audioEngine.dir\tf-lite-api\tensorflow_src\tensorflow\lite\delegates\gpu\gl\api.cc.o.d -o CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/gl/api.cc.o -c D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/gl/api.cc
+In file included from D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/gl/api.cc:16:
+In file included from D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/gl/api.h:25:
+D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/common/model.h:26:10: fatal error: 'absl/memory/memory.h' file not found
+#include "absl/memory/memory.h"
+         ^~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+[5/6] Building CXX object CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/delegate.cc.o
+FAILED: CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/delegate.cc.o
+C:\Users\SHUBH\AppData\Local\Android\Sdk\ndk\25.1.8937393\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android26 --sysroot=C:/Users/SHUBH/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DaudioEngine_EXPORTS -ID:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src -ID:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/include/flatbuffers/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/delegate.cc.o -MF CMakeFiles\audioEngine.dir\tf-lite-api\tensorflow_src\tensorflow\lite\delegates\gpu\delegate.cc.o.d -o CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/delegate.cc.o -c D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/delegate.cc
+D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/delegate.cc:25:10: fatal error: 'absl/container/flat_hash_map.h' file not found
+#include "absl/container/flat_hash_map.h"
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
 ninja: build stopped: subcommand failed.
 
 C++ build system [build] failed while executing:
@@ -190,23 +232,39 @@ C++ build system [build] failed while executing:
 	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
 	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:47)
 Caused by: com.android.ide.common.process.ProcessException: ninja: Entering directory `D:\Whisper-Vilsan\whisper_native\app\.cxx\Debug\39633t4o\arm64-v8a'
-[1/3] Building CXX object CMakeFiles/audioEngine.dir/TFLiteEngineJNI.cpp.o
-[2/3] Building CXX object CMakeFiles/audioEngine.dir/TFLiteEngine.cpp.o
-[3/3] Linking CXX shared library D:\Whisper-Vilsan\whisper_native\app\build\intermediates\cxx\Debug\39633t4o\obj\arm64-v8a\libaudioEngine.so
-FAILED: D:/Whisper-Vilsan/whisper_native/app/build/intermediates/cxx/Debug/39633t4o/obj/arm64-v8a/libaudioEngine.so
-cmd.exe /C "cd . && C:\Users\SHUBH\AppData\Local\Android\Sdk\ndk\25.1.8937393\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android26 --sysroot=C:/Users/SHUBH/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot -fPIC -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fno-limit-debug-info  -static-libstdc++ -Wl,--build-id=sha1 -Wl,--no-rosegment -Wl,--fatal-warnings -Wl,--gc-sections -Wl,--no-undefined -Qunused-arguments -shared -Wl,-soname,libaudioEngine.so -o D:\Whisper-Vilsan\whisper_native\app\build\intermediates\cxx\Debug\39633t4o\obj\arm64-v8a\libaudioEngine.so CMakeFiles/audioEngine.dir/TFLiteEngine.cpp.o CMakeFiles/audioEngine.dir/TFLiteEngineJNI.cpp.o  D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/generated-libs/arm64-v8a/libtensorflowlite.so  -latomic -lm && cd ."
-ld: error: undefined symbol: TfLiteGpuDelegateOptionsV2Default
->>> referenced by TFLiteEngine.cpp:271 (D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/TFLiteEngine.cpp:271)
->>>               CMakeFiles/audioEngine.dir/TFLiteEngine.cpp.o:(TFLiteEngine::initializeGpuDelegate())
-
-ld: error: undefined symbol: TfLiteGpuDelegateV2Create
->>> referenced by TFLiteEngine.cpp:277 (D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/TFLiteEngine.cpp:277)
->>>               CMakeFiles/audioEngine.dir/TFLiteEngine.cpp.o:(TFLiteEngine::initializeGpuDelegate())
-
-ld: error: undefined symbol: TfLiteGpuDelegateV2Delete
->>> referenced by TFLiteEngine.cpp:287 (D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/TFLiteEngine.cpp:287)
->>>               CMakeFiles/audioEngine.dir/TFLiteEngine.cpp.o:(TFLiteEngine::cleanupGpuDelegate())
-clang++: error: linker command failed with exit code 1 (use -v to see invocation)
+[1/6] Building CXX object CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/delegate_options.cc.o
+[2/6] Building CXX object CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/api.cc.o
+FAILED: CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/api.cc.o
+C:\Users\SHUBH\AppData\Local\Android\Sdk\ndk\25.1.8937393\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android26 --sysroot=C:/Users/SHUBH/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DaudioEngine_EXPORTS -ID:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src -ID:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/include/flatbuffers/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/api.cc.o -MF CMakeFiles\audioEngine.dir\tf-lite-api\tensorflow_src\tensorflow\lite\delegates\gpu\api.cc.o.d -o CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/api.cc.o -c D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/api.cc
+In file included from D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/api.cc:16:
+D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/api.h:41:10: fatal error: 'absl/types/span.h' file not found
+#include "absl/types/span.h"
+         ^~~~~~~~~~~~~~~~~~~
+1 error generated.
+[3/6] Building CXX object CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/cl/api.cc.o
+FAILED: CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/cl/api.cc.o
+C:\Users\SHUBH\AppData\Local\Android\Sdk\ndk\25.1.8937393\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android26 --sysroot=C:/Users/SHUBH/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DaudioEngine_EXPORTS -ID:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src -ID:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/include/flatbuffers/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/cl/api.cc.o -MF CMakeFiles\audioEngine.dir\tf-lite-api\tensorflow_src\tensorflow\lite\delegates\gpu\cl\api.cc.o.d -o CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/cl/api.cc.o -c D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/cl/api.cc
+In file included from D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/cl/api.cc:16:
+D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/cl/api.h:28:10: fatal error: 'absl/types/span.h' file not found
+#include "absl/types/span.h"
+         ^~~~~~~~~~~~~~~~~~~
+1 error generated.
+[4/6] Building CXX object CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/gl/api.cc.o
+FAILED: CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/gl/api.cc.o
+C:\Users\SHUBH\AppData\Local\Android\Sdk\ndk\25.1.8937393\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android26 --sysroot=C:/Users/SHUBH/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DaudioEngine_EXPORTS -ID:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src -ID:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/include/flatbuffers/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/gl/api.cc.o -MF CMakeFiles\audioEngine.dir\tf-lite-api\tensorflow_src\tensorflow\lite\delegates\gpu\gl\api.cc.o.d -o CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/gl/api.cc.o -c D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/gl/api.cc
+In file included from D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/gl/api.cc:16:
+In file included from D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/gl/api.h:25:
+D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/common/model.h:26:10: fatal error: 'absl/memory/memory.h' file not found
+#include "absl/memory/memory.h"
+         ^~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+[5/6] Building CXX object CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/delegate.cc.o
+FAILED: CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/delegate.cc.o
+C:\Users\SHUBH\AppData\Local\Android\Sdk\ndk\25.1.8937393\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android26 --sysroot=C:/Users/SHUBH/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DaudioEngine_EXPORTS -ID:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src -ID:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/include/flatbuffers/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/delegate.cc.o -MF CMakeFiles\audioEngine.dir\tf-lite-api\tensorflow_src\tensorflow\lite\delegates\gpu\delegate.cc.o.d -o CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/delegate.cc.o -c D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/delegate.cc
+D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/delegate.cc:25:10: fatal error: 'absl/container/flat_hash_map.h' file not found
+#include "absl/container/flat_hash_map.h"
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
 ninja: build stopped: subcommand failed.
 
 C++ build system [build] failed while executing:
@@ -244,6 +302,6 @@ Caused by: org.gradle.process.internal.ExecException: Process 'command 'C:\Users
 	... 129 more
 
 
-BUILD FAILED in 47s
-32 actionable tasks: 32 executed
+BUILD FAILED in 3s
+32 actionable tasks: 3 executed, 29 up-to-date
 Ask Gemini
