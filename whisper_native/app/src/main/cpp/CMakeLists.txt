@@ -6,6 +6,7 @@ project(TFLiteEngine VERSION 1.0)
 set(INCLUDE_DIRS
         ${CMAKE_CURRENT_LIST_DIR}/tf-lite-api/tensorflow_src
         ${CMAKE_CURRENT_LIST_DIR}/tf-lite-api/include/flatbuffers/include
+        ${CMAKE_CURRENT_LIST_DIR}/tf-lite-api/include/abseil-cpp
         )
 
 # GPU Delegate source files
