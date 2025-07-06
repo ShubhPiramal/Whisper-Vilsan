@@ -8,9 +8,18 @@ set(INCLUDE_DIRS
         ${CMAKE_CURRENT_LIST_DIR}/tf-lite-api/include/flatbuffers/include
         )
 
+# GPU Delegate source files
+set(GPU_DELEGATE_SOURCES
+        ${CMAKE_CURRENT_LIST_DIR}/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/delegate.cc
+        ${CMAKE_CURRENT_LIST_DIR}/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/delegate_options.cc
+        ${CMAKE_CURRENT_LIST_DIR}/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/api.cc
+        ${CMAKE_CURRENT_LIST_DIR}/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/cl/api.cc
+        ${CMAKE_CURRENT_LIST_DIR}/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/gl/api.cc
+        )
+
 # # Check if the build is Android
 if (ANDROID)
-    add_library(audioEngine SHARED TFLiteEngine.cpp TFLiteEngineJNI.cpp)
+    add_library(audioEngine SHARED TFLiteEngine.cpp TFLiteEngineJNI.cpp ${GPU_DELEGATE_SOURCES})
     target_include_directories(audioEngine PRIVATE ${INCLUDE_DIRS})
 
     # Add 'tflite' library (imported)
@@ -35,9 +44,3 @@ if (NOT ANDROID)
     add_executable(my_audio_app main.cpp)
     target_link_libraries(my_audio_app PRIVATE audioEngine tflite)
 endif ()
-
-
-
-
-
-
