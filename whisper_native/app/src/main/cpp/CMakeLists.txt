@@ -15,6 +15,7 @@ set(GPU_DELEGATE_SOURCES
         ${CMAKE_CURRENT_LIST_DIR}/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/delegate_options.cc
         ${CMAKE_CURRENT_LIST_DIR}/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/api.cc
         ${CMAKE_CURRENT_LIST_DIR}/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/cl/api.cc
+        ${CMAKE_CURRENT_LIST_DIR}/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/cl/opencl_wrapper.cc
         ${CMAKE_CURRENT_LIST_DIR}/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/gl/api.cc
         )
 
