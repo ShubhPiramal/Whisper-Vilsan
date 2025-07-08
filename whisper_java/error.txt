@@ -1,9 +1,22 @@
-Failed to measure fs-verity, errno 1: /data/app/~~icPXoa11FY-hyYc1mMQIdw==/com.whispertflite-vdusAjSCkTvaHeenFcdvLQ==/base.apk
-2025-07-08 23:10:42.362 11285-11285 USNET                   pid-11285                            E  USNET: appName: com.whispertflite
-2025-07-08 23:10:46.252  5069-5254  WindowManager           system_server                        E  win=Window{ae1f29d u0 Splash Screen com.whispertflite EXITING} destroySurfaces: appStopped=false win.mWindowRemovalAllowed=true win.mRemoveOnExit=true win.mViewVisibility=8 caller=com.android.server.wm.ActivityRecord.destroySurfaces:5873 com.android.server.wm.ActivityRecord.destroySurfaces:5854 com.android.server.wm.WindowState.onExitAnimationDone:6000 com.android.server.wm.WindowStateAnimator.onAnimationFinished:242 com.android.server.wm.WindowState.onAnimationFinished:6253 com.android.server.wm.WindowContainer$$ExternalSyntheticLambda0.onAnimationFinished:2 com.android.server.wm.SurfaceAnimator.lambda$getFinishedCallback$0$SurfaceAnimator:113 
-2025-07-08 23:10:53.158  4831-4831  audit                   auditd                               E  type=1327 audit(1751996453.155:873710): proctitle="com.whispertflite"
-2025-07-08 23:10:53.174 11285-11285 AndroidRuntime          pid-11285                            E  FATAL EXCEPTION: main (Ask Gemini)
-                                                                                                    Process: com.whispertflite, PID: 11285
+2025-07-08 23:15:44.099 13908-14009 ProfileInstaller        com.whispertflite                    D  Installing profile for com.whispertflite
+2025-07-08 23:15:44.740 13908-13908 ViewRootIm...nActivity] com.whispertflite                    I  ViewPostIme pointer 0
+2025-07-08 23:15:44.740 13908-13908 MSHandlerLifeCycle      com.whispertflite                    I  isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@deeec4d[MainActivity]
+2025-07-08 23:15:44.834 13908-13908 ViewRootIm...nActivity] com.whispertflite                    I  ViewPostIme pointer 1
+2025-07-08 23:15:44.834 13908-13908 MSHandlerLifeCycle      com.whispertflite                    I  isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@deeec4d[MainActivity]
+2025-07-08 23:15:44.880 13908-13908 nativeloader            com.whispertflite                    D  Load /data/app/~~icPXoa11FY-hyYc1mMQIdw==/com.whispertflite-vdusAjSCkTvaHeenFcdvLQ==/base.apk!/lib/arm64-v8a/libtensorflowlite_gpu_jni.so using class loader ns clns-4 (caller=/data/app/~~icPXoa11FY-hyYc1mMQIdw==/com.whispertflite-vdusAjSCkTvaHeenFcdvLQ==/base.apk!classes6.dex): ok
+2025-07-08 23:15:44.882 13908-13908 libEGL                  com.whispertflite                    E  call to OpenGL ES API with no current context (logged once per thread)
+2025-07-08 23:15:44.885 13908-13908 WhisperEngineJava       com.whispertflite                    D  GPU delegate is supported on this device, attempting initialization
+2025-07-08 23:15:44.885 13908-13908 tflite                  com.whispertflite                    I  Created TensorFlow Lite delegate for GPU.
+2025-07-08 23:15:44.886 13908-13908 WhisperEngineJava       com.whispertflite                    D  GPU delegate initialized successfully
+2025-07-08 23:15:44.890 13908-13908 nativeloader            com.whispertflite                    D  Load /data/app/~~icPXoa11FY-hyYc1mMQIdw==/com.whispertflite-vdusAjSCkTvaHeenFcdvLQ==/base.apk!/lib/arm64-v8a/libtensorflowlite_jni.so using class loader ns clns-4 (caller=/data/app/~~icPXoa11FY-hyYc1mMQIdw==/com.whispertflite-vdusAjSCkTvaHeenFcdvLQ==/base.apk!classes6.dex): ok
+2025-07-08 23:15:44.891 13908-13908 InterpreterApi          com.whispertflite                    I  Loaded native library: tensorflowlite_jni
+2025-07-08 23:15:44.893 13908-13908 nativeloader            com.whispertflite                    D  Load /data/app/~~icPXoa11FY-hyYc1mMQIdw==/com.whispertflite-vdusAjSCkTvaHeenFcdvLQ==/base.apk!/lib/arm64-v8a/libtensorflowlite_jni_gms_client.so using class loader ns clns-4 (caller=/data/app/~~icPXoa11FY-hyYc1mMQIdw==/com.whispertflite-vdusAjSCkTvaHeenFcdvLQ==/base.apk!classes6.dex): ok
+2025-07-08 23:15:44.894 13908-13908 InterpreterApi          com.whispertflite                    I  Loaded native library: tensorflowlite_jni_gms_client
+2025-07-08 23:15:44.929 13908-13908 tflite                  com.whispertflite                    I  Initialized TensorFlow Lite runtime.
+2025-07-08 23:15:44.930 13908-13908 libc                    com.whispertflite                    E  Access denied finding property "ro.mediatek.platform"
+2025-07-08 23:15:44.943 13908-13908 AndroidRuntime          com.whispertflite                    D  Shutting down VM
+2025-07-08 23:15:44.947 13908-13908 AndroidRuntime          com.whispertflite                    E  FATAL EXCEPTION: main (Ask Gemini)
+                                                                                                    Process: com.whispertflite, PID: 13908
                                                                                                     java.lang.IllegalArgumentException: Internal error: Error applying delegate: 
                                                                                                     	at org.tensorflow.lite.NativeInterpreterWrapper.createInterpreter(Native Method)
                                                                                                     	at org.tensorflow.lite.NativeInterpreterWrapper.init(NativeInterpreterWrapper.java:110)
@@ -31,4 +44,4 @@ Failed to measure fs-verity, errno 1: /data/app/~~icPXoa11FY-hyYc1mMQIdw==/com.w
                                                                                                     	at java.lang.reflect.Method.invoke(Native Method)
                                                                                                     	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:571)
                                                                                                     	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1135)
-2025-07-08 23:11:16.188 11991-11991 USNET                   pid-11991                            E  USNET: appName: com.whispertflite
+2025-07-08 23:15:44.996 13908-13908 Process                 com.whispertflite                    I  Sending signal. PID: 13908 SIG: 9
