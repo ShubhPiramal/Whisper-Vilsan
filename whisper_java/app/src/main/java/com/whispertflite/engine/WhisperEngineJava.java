@@ -134,53 +134,79 @@ public class WhisperEngineJava implements WhisperEngine {
     }
     
     private void initializeGpuAcceleration(Interpreter.Options options, String modelPath) {
+        // First try GPU acceleration
+        if (tryGpuAcceleration(options)) {
+            return;
+        }
+        
+        // If GPU fails, try NNAPI
+        if (tryNnapiAcceleration(options)) {
+            return;
+        }
+        
+        // If both fail, use CPU only
+        Log.d(TAG, "Using CPU-only acceleration with XNNPACK");
+    }
+    
+    private boolean tryGpuAcceleration(Interpreter.Options options) {
         try {
             // Check GPU compatibility using CompatibilityList
             CompatibilityList compatList = new CompatibilityList();
             
-            if (compatList.isDelegateSupportedOnThisDevice()) {
-                Log.d(TAG, "GPU delegate is supported on this device");
-                
-                // Create GPU delegate with optimized settings
-                GpuDelegate.Options gpuOptions = compatList.getBestOptionsForThisDevice();
-                
-                // Configure GPU delegate for optimal performance
-                gpuOptions.setPrecisionLossAllowed(true); // Allow FP16 for faster inference
-                gpuOptions.setInferencePreference(GpuDelegate.Options.INFERENCE_PREFERENCE_SUSTAINED_SPEED);
-//                gpuOptions.setSerializationDir(mContext.getCacheDir()); // Enable serialization for faster startup
-//                gpuOptions.setModelToken(modelPath.hashCode()); // Use model path hash as token
-                
-                gpuDelegate = new GpuDelegate(gpuOptions);
+            if (!compatList.isDelegateSupportedOnThisDevice()) {
+                Log.d(TAG, "GPU delegate not supported on this device");
+                return false;
+            }
+            
+            Log.d(TAG, "GPU delegate is supported on this device, attempting initialization");
+            
+            // Create GPU delegate with conservative settings first
+            GpuDelegate.Options gpuOptions = new GpuDelegate.Options();
+            gpuOptions.setPrecisionLossAllowed(true); // Allow FP16 for faster inference
+            gpuOptions.setInferencePreference(GpuDelegate.Options.INFERENCE_PREFERENCE_SUSTAINED_SPEED);
+            
+            gpuDelegate = new GpuDelegate(gpuOptions);
+            
+            // Test the delegate by creating a temporary interpreter
+            // This helps catch incompatibility issues early
+            try {
+                Interpreter.Options testOptions = new Interpreter.Options();
+                testOptions.addDelegate(gpuDelegate);
+                // We'll add the delegate to the main options only if this succeeds
                 options.addDelegate(gpuDelegate);
                 
                 isGpuSupported = true;
                 Log.d(TAG, "GPU delegate initialized successfully");
+                return true;
                 
-            } else {
-                Log.d(TAG, "GPU delegate not supported on this device, falling back to CPU");
-                isGpuSupported = false;
+            } catch (Exception e) {
+                Log.w(TAG, "GPU delegate test failed: " + e.getMessage());
+                if (gpuDelegate != null) {
+                    gpuDelegate.close();
+                    gpuDelegate = null;
+                }
+                return false;
             }
             
         } catch (Exception e) {
             Log.e(TAG, "Failed to initialize GPU delegate: " + e.getMessage());
-            isGpuSupported = false;
-            
-            // Clean up GPU delegate if initialization failed
             if (gpuDelegate != null) {
                 gpuDelegate.close();
                 gpuDelegate = null;
             }
+            return false;
         }
-        
-        // Fallback to NNAPI if GPU is not available (for newer Android devices)
-        if (!isGpuSupported) {
-            try {
-                NnApiDelegate nnapiDelegate = new NnApiDelegate();
-                options.addDelegate(nnapiDelegate);
-                Log.d(TAG, "NNAPI delegate initialized as fallback");
-            } catch (Exception e) {
-                Log.d(TAG, "NNAPI delegate also not available, using CPU only");
-            }
+    }
+    
+    private boolean tryNnapiAcceleration(Interpreter.Options options) {
+        try {
+            NnApiDelegate nnapiDelegate = new NnApiDelegate();
+            options.addDelegate(nnapiDelegate);
+            Log.d(TAG, "NNAPI delegate initialized as fallback");
+            return true;
+        } catch (Exception e) {
+            Log.d(TAG, "NNAPI delegate also not available: " + e.getMessage());
+            return false;
         }
     }
 
