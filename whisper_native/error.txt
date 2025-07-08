@@ -1,7 +1,0 @@
-C:\Users\SHUBH\AppData\Local\Android\Sdk\ndk\25.1.8937393\toolchains\llvm\prebuilt\windows-x86_64\bin\clang++.exe --target=aarch64-none-linux-android26 --sysroot=C:/Users/SHUBH/AppData/Local/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/windows-x86_64/sysroot -DaudioEngine_EXPORTS -ID:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src -ID:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/include/flatbuffers/include -ID:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/include/abseil-cpp -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fno-limit-debug-info  -fPIC -MD -MT CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/api.cc.o -MF CMakeFiles\audioEngine.dir\tf-lite-api\tensorflow_src\tensorflow\lite\delegates\gpu\api.cc.o.d -o CMakeFiles/audioEngine.dir/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/api.cc.o -c D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/api.cc
-
-In file included from D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/api.cc:16:
-D:/Whisper-Vilsan/whisper_native/app/src/main/cpp/tf-lite-api/tensorflow_src/tensorflow/lite/delegates/gpu/api.h:43:10: fatal error: 'CL/cl.h' file not found
-#include <CL/cl.h>
-         ^~~~~~~~~
-Ask Gemini
