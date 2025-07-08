@@ -146,13 +146,26 @@ public class WhisperEngineJava implements WhisperEngine {
     }
     
     private Interpreter tryCreateGpuInterpreter(ByteBuffer tfliteModel) {
+        // Try multiple GPU configurations to handle dynamic tensors
+        Interpreter interpreter = tryGpuWithDynamicTensorSupport(tfliteModel);
+        if (interpreter != null) return interpreter;
+        
+        interpreter = tryGpuWithStaticTensorWorkaround(tfliteModel);
+        if (interpreter != null) return interpreter;
+        
+        // Try with fixed input shapes to force static behavior
+        return tryGpuWithFixedInputShapes(tfliteModel);
+    }
+    
+    private Interpreter tryGpuWithDynamicTensorSupport(ByteBuffer tfliteModel) {
         try {
-            // Check GPU compatibility with additional error handling for platform-specific issues
+            Log.d(TAG, "Attempting GPU with dynamic tensor support");
+            
             CompatibilityList compatList;
             try {
                 compatList = new CompatibilityList();
             } catch (Exception e) {
-                Log.w(TAG, "Failed to create CompatibilityList (platform issue): " + e.getMessage());
+                Log.w(TAG, "Failed to create CompatibilityList: " + e.getMessage());
                 return null;
             }
             
@@ -161,32 +174,100 @@ public class WhisperEngineJava implements WhisperEngine {
                 return null;
             }
             
-            Log.d(TAG, "Attempting to create GPU interpreter");
-            
-            // Create GPU delegate with minimal, most compatible settings
+            // Try with experimental dynamic tensor support
             GpuDelegate.Options gpuOptions = new GpuDelegate.Options();
             gpuOptions.setPrecisionLossAllowed(true);
-            // Use FAST_SINGLE_ANSWER instead of SUSTAINED_SPEED for better compatibility
             gpuOptions.setInferencePreference(GpuDelegate.Options.INFERENCE_PREFERENCE_FAST_SINGLE_ANSWER);
+            
+            // Enable experimental features that might support dynamic tensors
+            try {
+                // Try to enable dynamic shape support if available
+                gpuOptions.setQuantizedModelsAllowed(true);
+            } catch (Exception e) {
+                Log.d(TAG, "Quantized models option not available: " + e.getMessage());
+            }
             
             gpuDelegate = new GpuDelegate(gpuOptions);
             
-            // Create interpreter options with conservative settings
             Interpreter.Options options = new Interpreter.Options();
-            options.setNumThreads(Math.min(4, Runtime.getRuntime().availableProcessors())); // Limit threads for stability
+            options.setNumThreads(Math.min(4, Runtime.getRuntime().availableProcessors()));
             options.addDelegate(gpuDelegate);
-            options.setUseXNNPACK(true);
+            options.setUseXNNPACK(false); // Disable XNNPACK when using GPU
             options.setAllowFp16PrecisionForFp32(true);
             
-            // Try to create the interpreter - this is where the actual test happens
+            // Enable experimental features for dynamic tensors
+            options.setAllowBufferHandleOutput(true);
+            
             Interpreter interpreter = new Interpreter(tfliteModel, options);
             
-            Log.d(TAG, "GPU interpreter created successfully");
+            Log.d(TAG, "GPU interpreter with dynamic tensor support created successfully");
             return interpreter;
             
         } catch (Exception e) {
-            Log.w(TAG, "Failed to create GPU interpreter: " + e.getMessage());
-            // Clean up GPU delegate if creation failed
+            Log.w(TAG, "GPU with dynamic tensor support failed: " + e.getMessage());
+            if (gpuDelegate != null) {
+                try {
+                    gpuDelegate.close();
+                } catch (Exception closeException) {
+                    Log.w(TAG, "Error closing GPU delegate: " + closeException.getMessage());
+                }
+                gpuDelegate = null;
+            }
+            return null;
+        }
+    }
+    
+    private Interpreter tryGpuWithStaticTensorWorkaround(ByteBuffer tfliteModel) {
+        try {
+            Log.d(TAG, "Attempting GPU with static tensor workaround");
+            
+            CompatibilityList compatList = new CompatibilityList();
+            if (!compatList.isDelegateSupportedOnThisDevice()) {
+                return null;
+            }
+            
+            // Create GPU delegate with settings optimized for static tensors
+            GpuDelegate.Options gpuOptions = new GpuDelegate.Options();
+            gpuOptions.setPrecisionLossAllowed(true);
+            gpuOptions.setInferencePreference(GpuDelegate.Options.INFERENCE_PREFERENCE_SUSTAINED_SPEED);
+            
+            // Try to force static tensor behavior
+            try {
+                gpuOptions.setQuantizedModelsAllowed(false); // Disable quantization for static behavior
+            } catch (Exception e) {
+                Log.d(TAG, "Quantization setting not available");
+            }
+            
+            gpuDelegate = new GpuDelegate(gpuOptions);
+            
+            Interpreter.Options options = new Interpreter.Options();
+            options.setNumThreads(1); // Use single thread for static tensor compatibility
+            options.addDelegate(gpuDelegate);
+            options.setUseXNNPACK(false);
+            options.setAllowFp16PrecisionForFp32(true);
+            
+            // Try to allocate tensors upfront to make them static
+            Interpreter interpreter = new Interpreter(tfliteModel, options);
+            
+            // Allocate tensors to try to make them static
+            try {
+                interpreter.allocateTensors();
+                Log.d(TAG, "Tensors allocated successfully for static behavior");
+            } catch (Exception e) {
+                Log.w(TAG, "Failed to allocate tensors: " + e.getMessage());
+                interpreter.close();
+                if (gpuDelegate != null) {
+                    gpuDelegate.close();
+                    gpuDelegate = null;
+                }
+                return null;
+            }
+            
+            Log.d(TAG, "GPU interpreter with static tensor workaround created successfully");
+            return interpreter;
+            
+        } catch (Exception e) {
+            Log.w(TAG, "GPU with static tensor workaround failed: " + e.getMessage());
             if (gpuDelegate != null) {
                 try {
                     gpuDelegate.close();
@@ -218,6 +299,68 @@ public class WhisperEngineJava implements WhisperEngine {
             
         } catch (Exception e) {
             Log.w(TAG, "Failed to create NNAPI interpreter: " + e.getMessage());
+            return null;
+        }
+    }
+    
+    private Interpreter tryGpuWithFixedInputShapes(ByteBuffer tfliteModel) {
+        try {
+            Log.d(TAG, "Attempting GPU with fixed input shapes for static tensor compatibility");
+            
+            CompatibilityList compatList = new CompatibilityList();
+            if (!compatList.isDelegateSupportedOnThisDevice()) {
+                return null;
+            }
+            
+            // Create GPU delegate with most basic settings
+            GpuDelegate.Options gpuOptions = new GpuDelegate.Options();
+            gpuOptions.setPrecisionLossAllowed(true);
+            gpuOptions.setInferencePreference(GpuDelegate.Options.INFERENCE_PREFERENCE_FAST_SINGLE_ANSWER);
+            
+            gpuDelegate = new GpuDelegate(gpuOptions);
+            
+            Interpreter.Options options = new Interpreter.Options();
+            options.setNumThreads(1); // Single thread for maximum compatibility
+            options.addDelegate(gpuDelegate);
+            options.setUseXNNPACK(false);
+            options.setAllowFp16PrecisionForFp32(false); // Disable FP16 for compatibility
+            
+            Interpreter interpreter = new Interpreter(tfliteModel, options);
+            
+            // Try to pre-allocate with fixed shapes to force static behavior
+            try {
+                // Allocate tensors first
+                interpreter.allocateTensors();
+                
+                // Try to resize input tensors to fixed shapes (Whisper typical input shape)
+                // Whisper input is typically [1, 80, 3000] for mel spectrogram
+                int[] fixedInputShape = {1, 80, 3000};
+                interpreter.resizeInput(0, fixedInputShape);
+                interpreter.allocateTensors();
+                
+                Log.d(TAG, "GPU interpreter with fixed input shapes created successfully");
+                return interpreter;
+                
+            } catch (Exception e) {
+                Log.w(TAG, "Failed to set fixed input shapes: " + e.getMessage());
+                interpreter.close();
+                if (gpuDelegate != null) {
+                    gpuDelegate.close();
+                    gpuDelegate = null;
+                }
+                return null;
+            }
+            
+        } catch (Exception e) {
+            Log.w(TAG, "GPU with fixed input shapes failed: " + e.getMessage());
+            if (gpuDelegate != null) {
+                try {
+                    gpuDelegate.close();
+                } catch (Exception closeException) {
+                    Log.w(TAG, "Error closing GPU delegate: " + closeException.getMessage());
+                }
+                gpuDelegate = null;
+            }
             return null;
         }
     }
