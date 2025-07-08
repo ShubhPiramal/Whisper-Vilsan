@@ -1,47 +1,78 @@
-2025-07-08 23:15:44.099 13908-14009 ProfileInstaller        com.whispertflite                    D  Installing profile for com.whispertflite
-2025-07-08 23:15:44.740 13908-13908 ViewRootIm...nActivity] com.whispertflite                    I  ViewPostIme pointer 0
-2025-07-08 23:15:44.740 13908-13908 MSHandlerLifeCycle      com.whispertflite                    I  isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@deeec4d[MainActivity]
-2025-07-08 23:15:44.834 13908-13908 ViewRootIm...nActivity] com.whispertflite                    I  ViewPostIme pointer 1
-2025-07-08 23:15:44.834 13908-13908 MSHandlerLifeCycle      com.whispertflite                    I  isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@deeec4d[MainActivity]
-2025-07-08 23:15:44.880 13908-13908 nativeloader            com.whispertflite                    D  Load /data/app/~~icPXoa11FY-hyYc1mMQIdw==/com.whispertflite-vdusAjSCkTvaHeenFcdvLQ==/base.apk!/lib/arm64-v8a/libtensorflowlite_gpu_jni.so using class loader ns clns-4 (caller=/data/app/~~icPXoa11FY-hyYc1mMQIdw==/com.whispertflite-vdusAjSCkTvaHeenFcdvLQ==/base.apk!classes6.dex): ok
-2025-07-08 23:15:44.882 13908-13908 libEGL                  com.whispertflite                    E  call to OpenGL ES API with no current context (logged once per thread)
-2025-07-08 23:15:44.885 13908-13908 WhisperEngineJava       com.whispertflite                    D  GPU delegate is supported on this device, attempting initialization
-2025-07-08 23:15:44.885 13908-13908 tflite                  com.whispertflite                    I  Created TensorFlow Lite delegate for GPU.
-2025-07-08 23:15:44.886 13908-13908 WhisperEngineJava       com.whispertflite                    D  GPU delegate initialized successfully
-2025-07-08 23:15:44.890 13908-13908 nativeloader            com.whispertflite                    D  Load /data/app/~~icPXoa11FY-hyYc1mMQIdw==/com.whispertflite-vdusAjSCkTvaHeenFcdvLQ==/base.apk!/lib/arm64-v8a/libtensorflowlite_jni.so using class loader ns clns-4 (caller=/data/app/~~icPXoa11FY-hyYc1mMQIdw==/com.whispertflite-vdusAjSCkTvaHeenFcdvLQ==/base.apk!classes6.dex): ok
-2025-07-08 23:15:44.891 13908-13908 InterpreterApi          com.whispertflite                    I  Loaded native library: tensorflowlite_jni
-2025-07-08 23:15:44.893 13908-13908 nativeloader            com.whispertflite                    D  Load /data/app/~~icPXoa11FY-hyYc1mMQIdw==/com.whispertflite-vdusAjSCkTvaHeenFcdvLQ==/base.apk!/lib/arm64-v8a/libtensorflowlite_jni_gms_client.so using class loader ns clns-4 (caller=/data/app/~~icPXoa11FY-hyYc1mMQIdw==/com.whispertflite-vdusAjSCkTvaHeenFcdvLQ==/base.apk!classes6.dex): ok
-2025-07-08 23:15:44.894 13908-13908 InterpreterApi          com.whispertflite                    I  Loaded native library: tensorflowlite_jni_gms_client
-2025-07-08 23:15:44.929 13908-13908 tflite                  com.whispertflite                    I  Initialized TensorFlow Lite runtime.
-2025-07-08 23:15:44.930 13908-13908 libc                    com.whispertflite                    E  Access denied finding property "ro.mediatek.platform"
-2025-07-08 23:15:44.943 13908-13908 AndroidRuntime          com.whispertflite                    D  Shutting down VM
-2025-07-08 23:15:44.947 13908-13908 AndroidRuntime          com.whispertflite                    E  FATAL EXCEPTION: main (Ask Gemini)
-                                                                                                    Process: com.whispertflite, PID: 13908
-                                                                                                    java.lang.IllegalArgumentException: Internal error: Error applying delegate: 
-                                                                                                    	at org.tensorflow.lite.NativeInterpreterWrapper.createInterpreter(Native Method)
-                                                                                                    	at org.tensorflow.lite.NativeInterpreterWrapper.init(NativeInterpreterWrapper.java:110)
-                                                                                                    	at org.tensorflow.lite.NativeInterpreterWrapper.<init>(NativeInterpreterWrapper.java:73)
-                                                                                                    	at org.tensorflow.lite.NativeInterpreterWrapperExperimental.<init>(NativeInterpreterWrapperExperimental.java:36)
-                                                                                                    	at org.tensorflow.lite.Interpreter.<init>(Interpreter.java:232)
-                                                                                                    	at com.whispertflite.engine.WhisperEngineJava.loadModel(WhisperEngineJava.java:131)
-                                                                                                    	at com.whispertflite.engine.WhisperEngineJava.initialize(WhisperEngineJava.java:48)
-                                                                                                    	at com.whispertflite.asr.Whisper.loadModel(Whisper.java:72)
-                                                                                                    	at com.whispertflite.asr.Whisper.loadModel(Whisper.java:67)
-                                                                                                    	at com.whispertflite.MainActivity.initModel(MainActivity.java:242)
-                                                                                                    	at com.whispertflite.MainActivity.lambda$onCreate$3$com-whispertflite-MainActivity(MainActivity.java:153)
-                                                                                                    	at com.whispertflite.MainActivity$$ExternalSyntheticLambda3.onClick(Unknown Source:2)
-                                                                                                    	at android.view.View.performClick(View.java:7792)
-                                                                                                    	at android.widget.TextView.performClick(TextView.java:16112)
-                                                                                                    	at com.google.android.material.button.MaterialButton.performClick(MaterialButton.java:1218)
-                                                                                                    	at android.view.View.performClickInternal(View.java:7769)
-                                                                                                    	at android.view.View.access$3800(View.java:910)
-                                                                                                    	at android.view.View$PerformClick.run(View.java:30218)
-                                                                                                    	at android.os.Handler.handleCallback(Handler.java:938)
-                                                                                                    	at android.os.Handler.dispatchMessage(Handler.java:99)
-                                                                                                    	at android.os.Looper.loopOnce(Looper.java:226)
-                                                                                                    	at android.os.Looper.loop(Looper.java:313)
-                                                                                                    	at android.app.ActivityThread.main(ActivityThread.java:8751)
-                                                                                                    	at java.lang.reflect.Method.invoke(Native Method)
-                                                                                                    	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:571)
-                                                                                                    	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1135)
-2025-07-08 23:15:44.996 13908-13908 Process                 com.whispertflite                    I  Sending signal. PID: 13908 SIG: 9
+2025-07-08 23:42:49.509 19939-19939 ViewRootIm...nActivity] com.whispertflite                    I  ViewPostIme pointer 0
+2025-07-08 23:42:49.510 19939-19939 MSHandlerLifeCycle      com.whispertflite                    I  isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@ab348aa[MainActivity]
+2025-07-08 23:42:49.639 19939-19939 ViewRootIm...nActivity] com.whispertflite                    I  ViewPostIme pointer 1
+2025-07-08 23:42:49.640 19939-19952 m.whispertflit          com.whispertflite                    I  Background concurrent copying GC freed 6978KB AllocSpace bytes, 0(0B) LOS objects, 62% free, 3707KB/9851KB, paused 348us,53us total 130.146ms
+2025-07-08 23:42:49.640 19939-19939 MSHandlerLifeCycle      com.whispertflite                    I  isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@ab348aa[MainActivity]
+2025-07-08 23:42:49.675 19939-19939 nativeloader            com.whispertflite                    D  Load /data/app/~~ejsL-2bupANNcqhlnM5Avw==/com.whispertflite-S2eeFSOLvI07iFSmJSUpwQ==/base.apk!/lib/arm64-v8a/libtensorflowlite_gpu_jni.so using class loader ns clns-4 (caller=/data/app/~~ejsL-2bupANNcqhlnM5Avw==/com.whispertflite-S2eeFSOLvI07iFSmJSUpwQ==/base.apk!classes6.dex): ok
+2025-07-08 23:42:49.677 19939-19939 libEGL                  com.whispertflite                    E  call to OpenGL ES API with no current context (logged once per thread)
+2025-07-08 23:42:49.680 19939-19939 WhisperEngineJava       com.whispertflite                    D  Attempting to create GPU interpreter
+2025-07-08 23:42:49.681 19939-19939 tflite                  com.whispertflite                    I  Created TensorFlow Lite delegate for GPU.
+2025-07-08 23:42:49.687 19939-19939 nativeloader            com.whispertflite                    D  Load /data/app/~~ejsL-2bupANNcqhlnM5Avw==/com.whispertflite-S2eeFSOLvI07iFSmJSUpwQ==/base.apk!/lib/arm64-v8a/libtensorflowlite_jni.so using class loader ns clns-4 (caller=/data/app/~~ejsL-2bupANNcqhlnM5Avw==/com.whispertflite-S2eeFSOLvI07iFSmJSUpwQ==/base.apk!classes6.dex): ok
+2025-07-08 23:42:49.688 19939-19939 TensorFlowLite          com.whispertflite                    I  Loaded native library: tensorflowlite_jni
+2025-07-08 23:42:49.690 19939-19939 nativeloader            com.whispertflite                    D  Load /data/app/~~ejsL-2bupANNcqhlnM5Avw==/com.whispertflite-S2eeFSOLvI07iFSmJSUpwQ==/base.apk!/lib/arm64-v8a/libtensorflowlite_jni_gms_client.so using class loader ns clns-4 (caller=/data/app/~~ejsL-2bupANNcqhlnM5Avw==/com.whispertflite-S2eeFSOLvI07iFSmJSUpwQ==/base.apk!classes6.dex): ok
+2025-07-08 23:42:49.690 19939-19939 TensorFlowLite          com.whispertflite                    I  Loaded native library: tensorflowlite_jni_gms_client
+2025-07-08 23:42:49.693 19939-19939 tflite                  com.whispertflite                    I  Initialized TensorFlow Lite runtime.
+2025-07-08 23:42:49.694 19939-19939 libc                    com.whispertflite                    E  Access denied finding property "ro.mediatek.platform"
+2025-07-08 23:42:49.695  4831-4831  audit                   auditd                               E  type=1327 audit(1751998369.691:884843): proctitle="com.whispertflite"
+2025-07-08 23:42:49.704 19939-19939 tflite                  com.whispertflite                    W  Attempting to use a delegate that only supports static-sized tensors with a graph that has dynamic-sized tensors (tensor#594 is a dynamic-sized tensor).
+2025-07-08 23:42:49.706 19939-19939 WhisperEngineJava       com.whispertflite                    W  Failed to create GPU interpreter: Internal error: Error applying delegate:
+2025-07-08 23:42:49.706 19939-19939 WhisperEngineJava       com.whispertflite                    D  Attempting to create NNAPI interpreter
+2025-07-08 23:42:49.716 19939-19939 Manager                 com.whispertflite                    I  DeviceManager::DeviceManager
+2025-07-08 23:42:49.716 19939-19939 Manager                 com.whispertflite                    I  findAvailableDevices
+2025-07-08 23:42:49.719 19939-19939 tflite                  com.whispertflite                    I  Created TensorFlow Lite delegate for NNAPI.
+2025-07-08 23:42:49.725 19939-19939 WhisperEngineJava       com.whispertflite                    W  Failed to create NNAPI interpreter: Internal error: Error applying delegate:
+2025-07-08 23:42:49.726 19939-19939 WhisperEngineJava       com.whispertflite                    D  Creating CPU-only interpreter
+2025-07-08 23:42:49.729 19939-19939 tflite                  com.whispertflite                    I  Created TensorFlow Lite XNNPACK delegate for CPU.
+2025-07-08 23:42:49.732 19939-19939 WhisperEngineJava       com.whispertflite                    D  Successfully created interpreter with CPU-only acceleration
+2025-07-08 23:42:49.732 19939-19939 WhisperEngineJava       com.whispertflite                    D  Model loaded with CPU acceleration
+2025-07-08 23:42:49.732 19939-19939 WhisperEngineJava       com.whispertflite                    D  Model is loaded.../storage/emulated/0/Android/data/com.whispertflite/files/whisper-tiny.en.tflite
+2025-07-08 23:42:49.735 19939-19939 WhisperUtil             com.whispertflite                    D  Vocab file size: 586191
+2025-07-08 23:42:49.735 19939-19939 WhisperUtil             com.whispertflite                    D  Magic number: 1431520590
+2025-07-08 23:42:49.735 19939-19939 WhisperUtil             com.whispertflite                    D  n_mel:80, n_fft:201
+2025-07-08 23:42:49.749 19939-19939 WhisperUtil             com.whispertflite                    D  nVocab: 50257
+2025-07-08 23:42:49.899 19939-19955 System                  com.whispertflite                    W  A resource failed to call close.
+2025-07-08 23:42:49.900 19939-19939 WhisperEngineJava       com.whispertflite                    D  Filters and Vocab are loaded.../storage/emulated/0/Android/data/com.whispertflite/files/filters_vocab_en.bin
+2025-07-08 23:42:49.901 19939-19939 MainActivity            com.whispertflite                    D  Model loaded with CPU + XNNPACK acceleration
+2025-07-08 23:42:49.902 19939-19939 MainActivity            com.whispertflite                    D  Start transcription...
+2025-07-08 23:42:49.902 19939-20234 MainActivity            com.whispertflite                    D  Update is received, Message: Processing...
+2025-07-08 23:42:49.903 19939-20234 WhisperEngineJava       com.whispertflite                    D  Calculating Mel spectrogram...
+2025-07-08 23:42:49.999 19939-20236 WhisperUtil             com.whispertflite                    D  Thread 0 started.
+2025-07-08 23:42:49.999 19939-20237 WhisperUtil             com.whispertflite                    D  Thread 1 started.
+2025-07-08 23:42:50.000 19939-20238 WhisperUtil             com.whispertflite                    D  Thread 2 started.
+2025-07-08 23:42:50.007 19939-20242 WhisperUtil             com.whispertflite                    D  Thread 6 started.
+2025-07-08 23:42:50.008 19939-20239 WhisperUtil             com.whispertflite                    D  Thread 3 started.
+2025-07-08 23:42:50.008 19939-20240 WhisperUtil             com.whispertflite                    D  Thread 4 started.
+2025-07-08 23:42:50.010 19939-20243 WhisperUtil             com.whispertflite                    D  Thread 7 started.
+2025-07-08 23:42:50.010 19939-20241 WhisperUtil             com.whispertflite                    D  Thread 5 started.
+2025-07-08 23:42:54.481 19939-19952 m.whispertflit          com.whispertflite                    I  Background young concurrent copying GC freed 8943KB AllocSpace bytes, 0(0B) LOS objects, 37% free, 15MB/24MB, paused 471us,318us total 121.902ms
+2025-07-08 23:42:59.219 19939-19952 m.whispertflit          com.whispertflite                    I  Background concurrent copying GC freed 9219KB AllocSpace bytes, 1(1876KB) LOS objects, 49% free, 13MB/26MB, paused 479us,378us total 227.338ms
+2025-07-08 23:42:59.220 19939-19955 System                  com.whispertflite                    W  A resource failed to call close.
+2025-07-08 23:43:06.655 19939-19952 m.whispertflit          com.whispertflite                    I  Background young concurrent copying GC freed 13MB AllocSpace bytes, 0(0B) LOS objects, 50% free, 13MB/26MB, paused 447us,313us total 108.458ms
+2025-07-08 23:43:13.941 19939-19952 m.whispertflit          com.whispertflite                    I  Background young concurrent copying GC freed 13MB AllocSpace bytes, 0(0B) LOS objects, 50% free, 13MB/26MB, paused 2.509ms,525us total 120.405ms
+2025-07-08 23:43:19.666 19939-19939 InputMethodManager      com.whispertflite                    D  startInputInner - Id : 0
+2025-07-08 23:43:19.667 19939-19939 InputMethodManager      com.whispertflite                    I  startInputInner - mService.startInputOrWindowGainedFocus
+2025-07-08 23:43:20.039 19939-19939 ViewRootIm...nActivity] com.whispertflite                    I  handleAppVisibility mAppVisible=true visible=false
+2025-07-08 23:43:20.064 19939-20040 OpenGLRenderer          com.whispertflite                    D  setSurface called with nullptr
+2025-07-08 23:43:20.064 19939-20040 OpenGLRenderer          com.whispertflite                    D  setSurface() destroyed EGLSurface
+2025-07-08 23:43:20.064 19939-20040 OpenGLRenderer          com.whispertflite                    D  destroyEglSurface
+2025-07-08 23:43:20.097 19939-19939 ViewRootIm...nActivity] com.whispertflite                    I  Relayout returned: old=(0,0,1080,2340) new=(0,0,1080,2340) req=(1080,2340)8 dur=9 res=0x5 s={false 0} ch=true fn=5
+2025-07-08 23:43:20.118 19939-19939 ViewRootIm...nActivity] com.whispertflite                    I  stopped(true) old=false
+2025-07-08 23:43:20.157 19939-19939 MSHandlerLifeCycle      com.whispertflite                    I  isMultiSplitHandlerRequested: windowingMode=1 isFullscreen=true isPopOver=false isHidden=false skipActivityType=false isHandlerType=false this: DecorView@ab348aa[MainActivity]
+2025-07-08 23:43:20.157 19939-19939 MSHandlerLifeCycle      com.whispertflite                    I  removeMultiSplitHandler: no exist. decor=DecorView@ab348aa[MainActivity]
+2025-07-08 23:43:20.188 19939-19939 ViewRootIm...nActivity] com.whispertflite                    I  Relayout returned: old=(0,0,1080,2340) new=(0,0,1080,2340) req=(1080,2340)8 dur=5 res=0x5 s={false 0} ch=false fn=-1
+2025-07-08 23:43:20.191  5069-7478  WindowManager           system_server                        E  win=Window{edad9db u0 com.whispertflite/com.whispertflite.MainActivity} destroySurfaces: appStopped=true win.mWindowRemovalAllowed=false win.mRemoveOnExit=false win.mViewVisibility=8 caller=com.android.server.wm.ActivityRecord.destroySurfaces:5873 com.android.server.wm.ActivityRecord.destroySurfaces:5854 com.android.server.wm.ActivityRecord.notifyAppStopped:5918 com.android.server.wm.ActivityRecord.activityStopped:6560 com.android.server.wm.ActivityClientController.activityStopped:254 android.app.IActivityClientController$Stub.onTransact:596 com.android.server.wm.ActivityClientController.onTransact:130
+2025-07-08 23:43:20.240 19939-19939 ViewRootIm...nActivity] com.whispertflite                    I  MSG_WINDOW_FOCUS_CHANGED 0 1
+2025-07-08 23:43:21.114 19939-19954 InputTransport          com.whispertflite                    D  Input channel destroyed: 'ClientS', fd=107
+2025-07-08 23:43:21.905 19939-20234 WhisperEngineJava       com.whispertflite                    D  Mel spectrogram is calculated...!
+2025-07-08 23:43:30.819 19939-20234 WhisperEngineJava       com.whispertflite                    D  output_len: 449
+2025-07-08 23:43:30.819 19939-20234 WhisperEngineJava       com.whispertflite                    D  Skipping token: 50257, word: [_SOT_]
+2025-07-08 23:43:30.819 19939-20234 WhisperEngineJava       com.whispertflite                    D  Skipping token: 50259, word: [_extra_token_50259]
+2025-07-08 23:43:30.819 19939-20234 WhisperEngineJava       com.whispertflite                    D  It is Transcription...
+2025-07-08 23:43:30.820 19939-20234 WhisperEngineJava       com.whispertflite                    D  Skipping token: 50359, word: [_extra_token_50359]
+2025-07-08 23:43:30.820 19939-20234 WhisperEngineJava       com.whispertflite                    D  Skipping token: 50363, word: [_BEG_]
+2025-07-08 23:43:30.820 19939-20234 WhisperEngineJava       com.whispertflite                    D  Skipping token: 50463, word: [_TT_100]
+2025-07-08 23:43:30.820 19939-20234 WhisperEngineJava       com.whispertflite                    D  Skipping token: 50613, word: [_TT_250]
+2025-07-08 23:43:30.821 19939-20234 WhisperEngineJava       com.whispertflite                    D  Inference is executed...!
+2025-07-08 23:43:30.821 19939-20234 MainActivity            com.whispertflite                    D  Result:  Record your voice for transcription.
+2025-07-08 23:43:30.822 19939-20234 Whisper                 com.whispertflite                    D  Time Taken for transcription: 40920ms
+2025-07-08 23:43:30.822 19939-20234 MainActivity            com.whispertflite                    D  Update is received, Message: Processing done...!

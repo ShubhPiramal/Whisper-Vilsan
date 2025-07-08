@@ -50,17 +50,17 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.2.0'
 
     // Main TensorFlow Lite library
-    implementation 'org.tensorflow:tensorflow-lite:2.14.0'
+    implementation 'org.tensorflow:tensorflow-lite:2.16.1'
     implementation 'org.tensorflow:tensorflow-lite-support:0.4.4'
 
     // TensorFlow Lite GPU delegate for acceleration
-    implementation 'org.tensorflow:tensorflow-lite-gpu:2.14.0'
-    implementation 'org.tensorflow:tensorflow-lite-gpu-api:2.14.0'
+    implementation 'org.tensorflow:tensorflow-lite-gpu:2.16.1'
+    implementation 'org.tensorflow:tensorflow-lite-gpu-api:2.16.1'
     
     // Google Play Services TFLite dependencies for better GPU support
-    implementation 'com.google.android.gms:play-services-tflite-java:16.1.0'
-    implementation 'com.google.android.gms:play-services-tflite-support:16.1.0'
-    implementation 'com.google.android.gms:play-services-tflite-gpu:16.2.0'
+    implementation 'com.google.android.gms:play-services-tflite-java:16.4.0'
+    implementation 'com.google.android.gms:play-services-tflite-support:16.4.0'
+    implementation 'com.google.android.gms:play-services-tflite-gpu:16.4.0'
 
 //    implementation files('libs/jlibrosa-1.1.8-SNAPSHOT-jar-with-dependencies.jar')
 }
