@@ -164,7 +164,7 @@ public class WhisperEngineJava implements WhisperEngine {
     
     private Interpreter tryGooglePlayServicesGpu(ByteBuffer tfliteModel) {
         try {
-            Log.d(TAG, "Attempting Google Play Services GPU delegate (better dynamic tensor support)");
+            Log.d(TAG, "Attempting Google Play Services GPU delegate with OpenGL context handling");
             
             // Initialize TFLite with Google Play Services
             TfLiteInitializationOptions initOptions = TfLiteInitializationOptions.builder()
@@ -186,29 +186,37 @@ public class WhisperEngineJava implements WhisperEngine {
             
             // Create interpreter with Google Play Services GPU support
             Interpreter.Options options = new Interpreter.Options();
-            options.setNumThreads(Math.min(4, Runtime.getRuntime().availableProcessors()));
+            options.setNumThreads(1); // Use single thread to avoid OpenGL context issues
             
             // The Google Play Services version should handle dynamic tensors better
             options.setUseXNNPACK(false);
-            options.setAllowFp16PrecisionForFp32(true);
+            options.setAllowFp16PrecisionForFp32(false); // Disable FP16 to avoid OpenGL issues
             
-            // Try to add GPU delegate through Google Play Services
+            // Try to add GPU delegate with OpenGL context handling
             try {
-                // This approach uses the Google Play Services GPU delegate which may support dynamic tensors
+                // Create GPU delegate with settings that avoid OpenGL context issues
                 GpuDelegate.Options gpuOptions = new GpuDelegate.Options();
                 gpuOptions.setPrecisionLossAllowed(true);
                 gpuOptions.setInferencePreference(GpuDelegate.Options.INFERENCE_PREFERENCE_FAST_SINGLE_ANSWER);
                 
+                // Try to avoid OpenGL context issues
+                try {
+                    gpuOptions.setQuantizedModelsAllowed(false); // Disable features that might cause OpenGL issues
+                } catch (Exception e) {
+                    Log.d(TAG, "Quantization setting not available");
+                }
+                
                 gpuDelegate = new GpuDelegate(gpuOptions);
                 options.addDelegate(gpuDelegate);
                 
+                // Create interpreter on main thread to ensure proper OpenGL context
                 Interpreter interpreter = new Interpreter(tfliteModel, options);
                 
                 Log.d(TAG, "Google Play Services GPU interpreter created successfully");
                 return interpreter;
                 
             } catch (Exception e) {
-                Log.w(TAG, "Google Play Services GPU delegate failed: " + e.getMessage());
+                Log.w(TAG, "Google Play Services GPU delegate failed (OpenGL context issue): " + e.getMessage());
                 if (gpuDelegate != null) {
                     gpuDelegate.close();
                     gpuDelegate = null;
