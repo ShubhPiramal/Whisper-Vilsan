@@ -147,8 +147,8 @@ public class WhisperEngineJava implements WhisperEngine {
                 // Configure GPU delegate for optimal performance
                 gpuOptions.setPrecisionLossAllowed(true); // Allow FP16 for faster inference
                 gpuOptions.setInferencePreference(GpuDelegate.Options.INFERENCE_PREFERENCE_SUSTAINED_SPEED);
-                gpuOptions.setSerializationDir(mContext.getCacheDir()); // Enable serialization for faster startup
-                gpuOptions.setModelToken(modelPath.hashCode()); // Use model path hash as token
+//                gpuOptions.setSerializationDir(mContext.getCacheDir()); // Enable serialization for faster startup
+//                gpuOptions.setModelToken(modelPath.hashCode()); // Use model path hash as token
                 
                 gpuDelegate = new GpuDelegate(gpuOptions);
                 options.addDelegate(gpuDelegate);
