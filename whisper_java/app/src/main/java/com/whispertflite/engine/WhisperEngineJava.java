@@ -115,100 +115,130 @@ public class WhisperEngineJava implements WhisperEngine {
         long declaredLength = fileChannel.size();
         ByteBuffer tfliteModel = fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength);
 
-        // Set the number of threads for inference
-        Interpreter.Options options = new Interpreter.Options();
-        options.setNumThreads(Runtime.getRuntime().availableProcessors());
-        
-        // Try to initialize GPU acceleration
-        initializeGpuAcceleration(options, modelPath);
-        
-        // Enable XNNPACK for CPU optimization as fallback
-        options.setUseXNNPACK(true);
-        
-        // Allow FP16 precision for better performance
-        options.setAllowFp16PrecisionForFp32(true);
-        
-        mInterpreter = new Interpreter(tfliteModel, options);
+        // Try GPU first, then fallback to CPU if it fails
+        mInterpreter = createInterpreterWithBestAcceleration(tfliteModel);
         
         Log.d(TAG, "Model loaded with " + (isGpuSupported ? "GPU" : "CPU") + " acceleration");
     }
     
-    private void initializeGpuAcceleration(Interpreter.Options options, String modelPath) {
+    private Interpreter createInterpreterWithBestAcceleration(ByteBuffer tfliteModel) {
         // First try GPU acceleration
-        if (tryGpuAcceleration(options)) {
-            return;
+        Interpreter interpreter = tryCreateGpuInterpreter(tfliteModel);
+        if (interpreter != null) {
+            isGpuSupported = true;
+            Log.d(TAG, "Successfully created interpreter with GPU acceleration");
+            return interpreter;
         }
         
         // If GPU fails, try NNAPI
-        if (tryNnapiAcceleration(options)) {
-            return;
+        interpreter = tryCreateNnapiInterpreter(tfliteModel);
+        if (interpreter != null) {
+            isGpuSupported = false;
+            Log.d(TAG, "Successfully created interpreter with NNAPI acceleration");
+            return interpreter;
         }
         
         // If both fail, use CPU only
-        Log.d(TAG, "Using CPU-only acceleration with XNNPACK");
+        interpreter = createCpuInterpreter(tfliteModel);
+        isGpuSupported = false;
+        Log.d(TAG, "Successfully created interpreter with CPU-only acceleration");
+        return interpreter;
     }
     
-    private boolean tryGpuAcceleration(Interpreter.Options options) {
+    private Interpreter tryCreateGpuInterpreter(ByteBuffer tfliteModel) {
         try {
-            // Check GPU compatibility using CompatibilityList
-            CompatibilityList compatList = new CompatibilityList();
+            // Check GPU compatibility with additional error handling for platform-specific issues
+            CompatibilityList compatList;
+            try {
+                compatList = new CompatibilityList();
+            } catch (Exception e) {
+                Log.w(TAG, "Failed to create CompatibilityList (platform issue): " + e.getMessage());
+                return null;
+            }
             
             if (!compatList.isDelegateSupportedOnThisDevice()) {
                 Log.d(TAG, "GPU delegate not supported on this device");
-                return false;
+                return null;
             }
             
-            Log.d(TAG, "GPU delegate is supported on this device, attempting initialization");
+            Log.d(TAG, "Attempting to create GPU interpreter");
             
-            // Create GPU delegate with conservative settings first
+            // Create GPU delegate with minimal, most compatible settings
             GpuDelegate.Options gpuOptions = new GpuDelegate.Options();
-            gpuOptions.setPrecisionLossAllowed(true); // Allow FP16 for faster inference
-            gpuOptions.setInferencePreference(GpuDelegate.Options.INFERENCE_PREFERENCE_SUSTAINED_SPEED);
+            gpuOptions.setPrecisionLossAllowed(true);
+            // Use FAST_SINGLE_ANSWER instead of SUSTAINED_SPEED for better compatibility
+            gpuOptions.setInferencePreference(GpuDelegate.Options.INFERENCE_PREFERENCE_FAST_SINGLE_ANSWER);
             
             gpuDelegate = new GpuDelegate(gpuOptions);
             
-            // Test the delegate by creating a temporary interpreter
-            // This helps catch incompatibility issues early
-            try {
-                Interpreter.Options testOptions = new Interpreter.Options();
-                testOptions.addDelegate(gpuDelegate);
-                // We'll add the delegate to the main options only if this succeeds
-                options.addDelegate(gpuDelegate);
-                
-                isGpuSupported = true;
-                Log.d(TAG, "GPU delegate initialized successfully");
-                return true;
-                
-            } catch (Exception e) {
-                Log.w(TAG, "GPU delegate test failed: " + e.getMessage());
-                if (gpuDelegate != null) {
-                    gpuDelegate.close();
-                    gpuDelegate = null;
-                }
-                return false;
-            }
+            // Create interpreter options with conservative settings
+            Interpreter.Options options = new Interpreter.Options();
+            options.setNumThreads(Math.min(4, Runtime.getRuntime().availableProcessors())); // Limit threads for stability
+            options.addDelegate(gpuDelegate);
+            options.setUseXNNPACK(true);
+            options.setAllowFp16PrecisionForFp32(true);
+            
+            // Try to create the interpreter - this is where the actual test happens
+            Interpreter interpreter = new Interpreter(tfliteModel, options);
+            
+            Log.d(TAG, "GPU interpreter created successfully");
+            return interpreter;
             
         } catch (Exception e) {
-            Log.e(TAG, "Failed to initialize GPU delegate: " + e.getMessage());
+            Log.w(TAG, "Failed to create GPU interpreter: " + e.getMessage());
+            // Clean up GPU delegate if creation failed
             if (gpuDelegate != null) {
-                gpuDelegate.close();
+                try {
+                    gpuDelegate.close();
+                } catch (Exception closeException) {
+                    Log.w(TAG, "Error closing GPU delegate: " + closeException.getMessage());
+                }
                 gpuDelegate = null;
             }
-            return false;
+            return null;
         }
     }
     
-    private boolean tryNnapiAcceleration(Interpreter.Options options) {
+    private Interpreter tryCreateNnapiInterpreter(ByteBuffer tfliteModel) {
         try {
+            Log.d(TAG, "Attempting to create NNAPI interpreter");
+            
             NnApiDelegate nnapiDelegate = new NnApiDelegate();
+            
+            Interpreter.Options options = new Interpreter.Options();
+            options.setNumThreads(Runtime.getRuntime().availableProcessors());
             options.addDelegate(nnapiDelegate);
-            Log.d(TAG, "NNAPI delegate initialized as fallback");
-            return true;
+            options.setUseXNNPACK(true);
+            options.setAllowFp16PrecisionForFp32(true);
+            
+            Interpreter interpreter = new Interpreter(tfliteModel, options);
+            
+            Log.d(TAG, "NNAPI interpreter created successfully");
+            return interpreter;
+            
         } catch (Exception e) {
-            Log.d(TAG, "NNAPI delegate also not available: " + e.getMessage());
-            return false;
+            Log.w(TAG, "Failed to create NNAPI interpreter: " + e.getMessage());
+            return null;
         }
     }
+    
+    private Interpreter createCpuInterpreter(ByteBuffer tfliteModel) {
+        try {
+            Log.d(TAG, "Creating CPU-only interpreter");
+            
+            Interpreter.Options options = new Interpreter.Options();
+            options.setNumThreads(Runtime.getRuntime().availableProcessors());
+            options.setUseXNNPACK(true);
+            options.setAllowFp16PrecisionForFp32(true);
+            
+            return new Interpreter(tfliteModel, options);
+            
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to create CPU interpreter: " + e.getMessage());
+            throw new RuntimeException("Failed to create any interpreter", e);
+        }
+    }
+    
 
     private float[] getMelSpectrogram(String wavePath) {
         // Get samples in PCM_FLOAT format
