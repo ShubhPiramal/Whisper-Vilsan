@@ -3,9 +3,9 @@ package com.whispertflite.engine;
 import android.content.Context;
 import android.util.Log;
 
-import com.google.android.gms.tflite.client.TfLiteInitializationOptions;
-import com.google.android.gms.tflite.gpu.support.TfLiteGpu;
-import com.google.android.gms.tflite.java.TfLite;
+// import com.google.android.gms.tflite.client.TfLiteInitializationOptions;
+// import com.google.android.gms.tflite.gpu.support.TfLiteGpu;
+// import com.google.android.gms.tflite.java.TfLite;
 import com.whispertflite.utils.WaveUtil;
 import com.whispertflite.utils.WhisperUtil;
 

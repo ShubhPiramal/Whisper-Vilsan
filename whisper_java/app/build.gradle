@@ -56,15 +56,11 @@ dependencies {
     // TensorFlow Lite GPU delegate for acceleration
     implementation 'org.tensorflow:tensorflow-lite-gpu:2.14.0'
     implementation 'org.tensorflow:tensorflow-lite-gpu-api:2.14.0'
-    implementation 'org.tensorflow:tensorflow-lite-gpu-delegate-plugin:0.4.2'    
-    implementation 'com.google.android.gms:play-services-tflite-gpu:16.2.0' // Google Play Services TFLite library
-
+    
     // Google Play Services TFLite dependencies for better GPU support
-    implementation 'com.google.ai.edge.litert:litert:1.0.1'
-    implementation 'com.google.ai.edge.litert:litert-support:1.0.1'
-    implementation 'com.google.ai.edge.litert:litert-gpu:1.0.1'
     implementation 'com.google.android.gms:play-services-tflite-java:16.1.0'
     implementation 'com.google.android.gms:play-services-tflite-support:16.1.0'
+    implementation 'com.google.android.gms:play-services-tflite-gpu:16.2.0'
 
 //    implementation files('libs/jlibrosa-1.1.8-SNAPSHOT-jar-with-dependencies.jar')
 }
